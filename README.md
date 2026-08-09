@@ -94,24 +94,79 @@ the Dispatch site's derived assets.
 **To rebrand:** replace `tracklink-icon.png` and `tracklink-wordmark.svg`,
 then regenerate the derived PNGs from them.
 
-## Colour palette — sourced from the app repo, not invented
+## Colour palette — verbatim from two live sources, not invented
 
-Every token in `assets/css/styles.css` is taken from the TrackLink app's own
-"light rebrand" spec entry in `CLAUDE.md` (2026-07-14, spec §10) and matches
-what's already live in the app and web Hub:
+Every `--tl-*` token in `assets/css/styles.css` is copied character-for-
+character from two authoritative sources that agree exactly:
 
-| Token | Hex | Used for |
-|---|---|---|
-| Ink / navy | `#14224E` | Headings, dark hero/footer gradient |
-| Footer navy | `#0F1B3D` | Site-wide footer background |
-| Brand blue | `#2F6BE4` | Primary royal blue, links, icons |
-| Sky blue | `#70ABEC` | Secondary blue, banner background |
-| Accent orange | `#F5821F` | CTA buttons |
-| Background | `#F3F7FC` | Light section tint |
+1. **Android app** — `app/src/main/java/com/tracklink/app/ui/theme/Color.kt`
+   (the `TLBlue`/`TLSky`/`TLOrange`/`TLNavy`/... `Color(0xFFxxxxxx)` constants)
+   and `Theme.kt` (`TrackLinkLightColors` — confirms `primary=TLBlue`,
+   `secondary=TLSky`, `tertiary=TLOrange`).
+2. **Live production web Hub** — fetched directly from
+   `https://tracklink-a9030.web.app/assets/index-BBJIMeYW.css` at build time;
+   its `:root{--tl-blue:#2f6be4; ...}` block is **byte-identical** to
+   `web/src/theme.css` in the app repo, confirming there is no drift between
+   source and what's actually deployed.
 
-Typography leads with "Avenir Next" (per the same spec note — the Android
-app itself stays on Roboto; this is a web-only choice) falling back to the
-system font stack.
+| Token | Hex | Source constant | Used for |
+|---|---|---|---|
+| `--tl-blue` | `#2F6BE4` | `TLBlue` / `--tl-blue` | Primary — links, icons, plan-card gradient start |
+| `--tl-blue-container` | `#D9E7FB` | `TLBlueContainer` | Banner bg, feature-icon tiles, callouts |
+| `--tl-sky` | `#70ABEC` | `TLSky` | Secondary — plan-card gradient end |
+| `--tl-orange` | `#F5821F` | `TLOrange` | The one CTA colour (buttons) |
+| `--tl-navy` | `#14224E` | `TLNavy` | Ink / heading text |
+| `--tl-footer` | `#0F1B3D` | `--tl-footer` (web theme.css) | Site-footer bg — the app's one dark accent |
+| `--tl-background` | `#F3F7FC` | `TLBackground` | Page/section background |
+| `--tl-outline` | `#D6E0EC` | `TLOutline` | Borders |
+| `--tl-text-secondary` | `#5B6B8C` | `TLTextSecondary` | Muted/body-secondary text |
+| `--tl-online` / `--tl-amber` / `--tl-offline` | `#2E9E5B` / `#D9922F` / `#8C96A6` | status colours | (reserved; not currently used on the marketing site) |
+| `--tl-error` | `#B3261E` | Material default error | Error text (unused on this site currently) |
+
+**Corrected from the previous build:** `--line`/border, `--muted` and
+`--error` had been approximated to nearby-but-wrong hex values
+(`#E4E8F0`, `#5B6577`, `#b91c1c`) instead of the product's actual
+`#D6E0EC`, `#5B6B8C`, `#B3261E` — now fixed to exact source values.
+`--brand-dark`/`--accent-dark` (hover-state shades) and `--focus` remain the
+only non-product tokens, clearly commented as such in the CSS — the app's
+Material theme doesn't define hover/focus colours for a static site to reuse.
+
+## Design language — matches the real product, not reused from Dispatch/BoatLog
+
+The first build borrowed Dispatch's dark-navy-hero template wholesale. That
+was wrong on its own terms: `Theme.kt` says outright **"there is intentionally
+no dark scheme; the brand is the light blue/white look with orange CTAs"**,
+and `web/src/theme.css` explicitly calls the footer band **"the light theme's
+single dark accent, coordinated with the marketing site"** — i.e. the footer
+is deliberately the *only* dark surface anywhere in the real product. So this
+build:
+
+- **Hero**: light (`--tl-background` + a soft `--tl-blue-container` radial
+  wash), white elevated card — not a navy gradient.
+- **Page headers** (privacy/terms breadcrumb band): light, matching the
+  app/web's actual `.topbar` (`background: var(--tl-card)`, white) rather than
+  a dark strip.
+- **Pricing highlight card**: brand-blue → sky gradient (the app's actual
+  primary/secondary pair), not navy.
+- **Footer**: navy `#0F1B3D` — the ONE dark section on the whole site,
+  exactly matching the real product's "single dark accent" design intent.
+- **Buttons**: 16px rounded rectangles (`--radius-btn`, matching the real
+  app/web `.btn { border-radius: 16px }`), not fully-pill shapes — Dispatch
+  and BoatLog both use pill buttons, so this alone reads differently at a
+  glance.
+- **OG banner** (`images/og-default.png`): regenerated light-first (white
+  card on a pale blue wash) to match, replacing the earlier dark-navy banner
+  that looked identical in spirit to Dispatch's.
+
+TrackLink's navy (`#14224E`) and Dispatch's navy (`#0B1F3A`) are genuinely
+different hex values from different real products — kept as each product's
+own truth — but the *structural* fix above is what actually makes the two
+sites stop reading as the same template in different colours.
+
+Typography leads with "Avenir Next" (per `Theme.kt`'s font-family comment and
+`web/src/theme.css`'s `font-family` declaration verbatim — the Android app
+itself stays on Roboto; Avenir Next is a web-only choice already made by the
+real web Hub) falling back to the system font stack.
 
 ## Pricing — sourced from the app repo, not invented
 
