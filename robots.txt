@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tracklink.civildigital.co.uk/sitemap.xml

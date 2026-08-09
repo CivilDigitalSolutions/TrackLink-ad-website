@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackLink — Live GPS Fleet Tracking for Small Teams</title>
+  <meta name="description" content="TrackLink is UK software for small fleets — couriers, farms, trades and field-service teams: live GPS tracking, a real-time team map, route history and seat-based billing from £18/month, with a 14-day free trial.">
+  <link rel="canonical" href="https://tracklink.civildigital.co.uk/">
+  <meta name="theme-color" content="#14224E">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TrackLink">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="TrackLink — live GPS fleet tracking for small teams">
+  <meta property="og:description" content="Live location tracking, a real-time team map, route history and simple seat-based pricing — built for couriers, farms, trades and field-service teams.">
+  <meta property="og:url" content="https://tracklink.civildigital.co.uk/">
+  <meta property="og:image" content="https://tracklink.civildigital.co.uk/images/og-default.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TrackLink — live GPS fleet tracking for small teams">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://tracklink.civildigital.co.uk/#app",
+    "name": "TrackLink",
+    "url": "https://tracklink.civildigital.co.uk/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Android, Web",
+    "description": "TrackLink is a lightweight fleet-tracking platform for small businesses — couriers, farms, trades, delivery and field services. Track users share live GPS location; Hub users see every device on a live map, review route history and manage their team.",
+    "offers": {
+      "@type": "Offer",
+      "price": "18.00",
+      "priceCurrency": "GBP",
+      "description": "Base plan: 1 Hub seat + 3 Track seats, billed monthly, includes a 14-day free trial."
+    },
+    "publisher": { "@id": "https://tracklink.civildigital.co.uk/#organization" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://tracklink.civildigital.co.uk/#website",
+    "name": "TrackLink",
+    "url": "https://tracklink.civildigital.co.uk/",
+    "inLanguage": "en-GB",
+    "publisher": { "@id": "https://tracklink.civildigital.co.uk/#organization" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://tracklink.civildigital.co.uk/#organization",
+    "name": "Civil Digital",
+    "url": "https://civildigital.co.uk/",
+    "logo": "https://tracklink.civildigital.co.uk/assets/brand/tracklink-icon.png",
+    "email": "info@civildigital.co.uk",
+    "telephone": "+44 7568 296136",
+    "address": { "@type": "PostalAddress", "addressLocality": "Bedford", "addressCountry": "GB" },
+    "sameAs": ["https://civildigital.co.uk/"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is TrackLink available yet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "TrackLink's tracking, live map and billing are built and running in production. We're finishing public sign-up rollout, so get in touch and we'll get your team set up directly." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does TrackLink cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "TrackLink starts at £18/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days — see current pricing on this page." }
+      },
+      {
+        "@type": "Question",
+        "name": "How often does TrackLink update a device's location?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is our team's location data isolated from other companies?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every organisation's data is isolated by a unique organisation ID and enforced in the database's own security rules, not just by the app — one business can never read or write another business's data." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="banner">
+    <strong>Free trial</strong> &nbsp;&bull;&nbsp; 14 days free, 1 Hub seat + 3 Track seats included — no card required to start.
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="TrackLink home">
+        <img class="brand__wordmark" src="/assets/brand/tracklink-wordmark.svg" alt="TrackLink">
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="primary-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span class="visually-hidden">Menu</span>
+      </button>
+      <ul class="nav__links" id="primary-nav">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li class="nav__cta"><a class="btn btn--primary" href="https://app.tracklink.civildigital.co.uk">Start free trial</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__copy">
+          <span class="eyebrow">GPS fleet tracking for small teams</span>
+          <h1>Know where your team is, <span class="accent">without the guesswork</span>.</h1>
+          <p class="hero__lead">TrackLink links every driver, vehicle or field worker to a live map your whole business can trust — built for couriers, farms, trades and delivery teams who need simple, honest location tracking.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="https://app.tracklink.civildigital.co.uk">Start free trial</a>
+            <a class="btn btn--ghost btn--lg" href="#features">See what's included</a>
+          </div>
+          <p class="hero__tagline">Track with certainty. Link with trust.</p>
+        </div>
+        <div class="hero__art">
+          <div class="hero-card">
+            <div class="hero-card__mark">
+              <img src="/assets/brand/tracklink-icon.png" alt="TrackLink app icon" width="150" height="150">
+            </div>
+            <h3>Live team map</h3>
+            <p>Every device, updated in seconds, on one screen.</p>
+            <div class="hero-card__stats">
+              <div class="hero-card__stat"><strong>&lt;5s</strong><span>upload to marker</span></div>
+              <div class="hero-card__stat"><strong>30s–1s</strong><span>update cadence</span></div>
+              <div class="hero-card__stat"><strong>1</strong><span>org, fully isolated</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features" aria-labelledby="features-h">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What TrackLink does</p>
+          <h2 id="features-h">Everything a small fleet needs to stay in sync</h2>
+          <p>Two simple roles — Track and Hub — cover the whole job: drivers report their position, and the business sees exactly where everyone is.</p>
+        </div>
+        <div class="features">
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" stroke="#14224E" stroke-width="1.8"/>
+                <circle cx="12" cy="10" r="2.6" stroke="#2F6BE4" stroke-width="1.8"/>
+              </svg>
+            </span>
+            <h3>Live GPS tracking</h3>
+            <p>Track users toggle tracking on and forget it — a persistent notification confirms it's running while location uploads in the background at a chosen interval.</p>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3.5" y="5" width="17" height="14" rx="2.5" stroke="#14224E" stroke-width="1.8"/>
+                <circle cx="9" cy="12" r="2.2" stroke="#2F6BE4" stroke-width="1.8"/>
+                <path d="M14 10.5h4M14 13.5h4" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h3>Live team map</h3>
+            <p>Hub users see every device on one map, refreshing automatically, with under 5-second latency from upload to marker move — no manual refresh needed.</p>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6" cy="19" r="2.4" stroke="#14224E" stroke-width="1.8"/>
+                <circle cx="18" cy="5" r="2.4" stroke="#14224E" stroke-width="1.8"/>
+                <path d="M8 19h7a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h3>Route history</h3>
+            <p>Review the last 24 hours, 7 days or 30 days for any device — a full route with stats, kept for 30 days by default or 365 days with the retention add-on.</p>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8.5" cy="8" r="3" stroke="#14224E" stroke-width="1.8"/>
+                <circle cx="17" cy="9.5" r="2.4" stroke="#14224E" stroke-width="1.8"/>
+                <path d="M3.5 19c.5-3 2.7-4.5 5-4.5s4.5 1.5 5 4.5" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M14.5 19c.4-2.2 1.9-3.4 3.5-3.4" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h3>Custom groups</h3>
+            <p>Organise Track users into your own groups — "Motorcycle fleet", "Car fleet", whatever fits — then filter the map and device list by group in one tap.</p>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="3" width="16" height="18" rx="2" stroke="#14224E" stroke-width="1.8"/>
+                <path d="M7.5 8h9M7.5 12h9M7.5 16h5.5" stroke="#14224E" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M16 15.5l1.6 1.6L21 13.5" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3>Multi-Hub organisations</h3>
+            <p>Add as many Hub (admin) users as you need — every Hub sees every device, so dispatchers and managers all work from the same live picture.</p>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="#14224E" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3>Isolated by design</h3>
+            <p>Every organisation's data is walled off in the database's own security rules — not just filtered on screen — so one business can never see another's.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section section--tint" id="how" aria-labelledby="how-h">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-h">Two roles, one live picture</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="step__num" aria-hidden="true">1</span>
+            <h3>Track toggles on</h3>
+            <p>A driver or field worker opens the app and toggles tracking on. Location uploads automatically in the background — no fiddling required.</p>
+          </div>
+          <div class="step">
+            <span class="step__num" aria-hidden="true">2</span>
+            <h3>Hub watches the map</h3>
+            <p>The business owner or dispatcher opens the live map and sees every active device update in near real time, filterable by group.</p>
+          </div>
+          <div class="step">
+            <span class="step__num" aria-hidden="true">3</span>
+            <h3>Review the history</h3>
+            <p>Pull up any device's route for the last 24 hours, 7 days or 30 days — journeys, stops and timing, all logged automatically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing" aria-labelledby="pricing-h">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Pricing</p>
+          <h2 id="pricing-h">One base plan. Add exactly the seats you need.</h2>
+          <p>Every plan includes every feature — live tracking, the team map, route history and groups. You only pay for how many people you're tracking and managing.</p>
+        </div>
+
+        <div class="plan-card">
+          <div>
+            <h3>Base plan</h3>
+            <div class="plan-card__amount">£18<small>/month</small></div>
+            <p class="plan-card__note">or £180/year (2 months free)</p>
+            <ul class="plan-card__features">
+              <li>1 Hub seat</li>
+              <li>3 Track seats</li>
+              <li>Live map &amp; route history</li>
+              <li>Custom groups</li>
+              <li>30-day history included</li>
+              <li>All features included</li>
+            </ul>
+          </div>
+          <div class="plan-card__cta">
+            <a class="btn btn--primary btn--lg" href="https://app.tracklink.civildigital.co.uk">Start free trial</a>
+            <span class="plan-card__trial">14 days free, no card required</span>
+          </div>
+        </div>
+
+        <div class="addons-grid">
+          <div class="addon-card">
+            <h4>Track seat packs</h4>
+            <p class="addon-rate">£5 per seat / month</p>
+            <table>
+              <tr><td>+5 Track seats</td><td>£25/mo</td></tr>
+              <tr><td>+10 Track seats</td><td>£50/mo</td></tr>
+              <tr><td>+15 Track seats</td><td>£75/mo</td></tr>
+            </table>
+          </div>
+          <div class="addon-card">
+            <h4>Hub seat packs</h4>
+            <p class="addon-rate">£6 per seat / month</p>
+            <table>
+              <tr><td>+2 Hub seats</td><td>£12/mo</td></tr>
+              <tr><td>+4 Hub seats</td><td>£24/mo</td></tr>
+            </table>
+          </div>
+          <div class="addon-card">
+            <h4>History retention</h4>
+            <p class="addon-rate">Flat rate, org-wide</p>
+            <table>
+              <tr><td>30 days (default)</td><td>Included</td></tr>
+              <tr><td>365 days (add-on)</td><td>£15/mo</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <p class="pricing-note">Every add-on is billed monthly or annually (annual ≈ 10&times; the monthly rate, roughly 2 months free). A Track seat is one tracked device; a Hub seat is one admin/dispatcher who can see the live map. Need a bigger fleet or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--tint" id="faq" aria-labelledby="faq-h">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Questions</p>
+          <h2 id="faq-h">Frequently asked questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Is TrackLink available yet?</summary>
+            <p>TrackLink's tracking, live map and billing are built and running in production. We're finishing public sign-up rollout, so <a href="mailto:info@civildigital.co.uk">get in touch</a> and we'll get your team set up directly.</p>
+          </details>
+          <details>
+            <summary>What does TrackLink cost?</summary>
+            <p>TrackLink starts at £18/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days — see <a href="#pricing">current pricing</a> above.</p>
+          </details>
+          <details>
+            <summary>How often does TrackLink update a device's location?</summary>
+            <p>The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance so you know the trade-off before you turn them on.</p>
+          </details>
+          <details>
+            <summary>Is our team's location data isolated from other companies?</summary>
+            <p>Yes. Every organisation's data is isolated by a unique organisation ID and enforced in the database's own security rules, not just by the app — one business can never read or write another business's data.</p>
+          </details>
+          <details>
+            <summary>What happens if a device loses signal?</summary>
+            <p>Fixes queue on the device and flush automatically once it reconnects — even after an extended period offline, nothing is lost, it just arrives a little later.</p>
+          </details>
+          <details>
+            <summary>Can more than one person manage the team?</summary>
+            <p>Yes — an organisation can have any number of Hub users, and every Hub sees every Track device. You can also organise Track users into custom groups (e.g. "Motorcycle fleet") and filter the map by group.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / start trial -->
+    <section class="section" id="trial" aria-labelledby="trial-h">
+      <div class="container">
+        <div class="cta">
+          <h2 id="trial-h">Ready to see your team on one map?</h2>
+          <p>Start your 14-day free trial — 1 Hub seat and 3 Track seats included, no card required.</p>
+          <div class="cta__actions">
+            <a class="btn btn--primary btn--lg" href="https://app.tracklink.civildigital.co.uk">Start free trial</a>
+            <a class="btn btn--ghost btn--lg" href="mailto:info@civildigital.co.uk">Talk to us first</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/">
+            <img class="brand__wordmark" src="/assets/brand/tracklink-wordmark.svg" alt="TrackLink">
+          </a>
+          <p>Live GPS fleet tracking, a real-time team map and route history for small businesses. TrackLink is operated by Civil Digital.</p>
+        </div>
+        <nav aria-label="Product">
+          <h2>Product</h2>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="https://app.tracklink.civildigital.co.uk">Start free trial</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2>Contact Info</h2>
+          <ul class="footer-links">
+            <li><a href="mailto:info@civildigital.co.uk">info@civildigital.co.uk</a></li>
+            <li><a href="https://wa.me/447568296136">WhatsApp: +44 7568 296136</a></li>
+            <li>Bedford, United Kingdom</li>
+            <li><a href="/privacy/">Privacy Policy</a></li>
+            <li><a href="/terms/">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year">2026</span> TrackLink — operated by Civil Digital. All rights reserved.</p>
+        <p>Track with certainty. Link with trust.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>
