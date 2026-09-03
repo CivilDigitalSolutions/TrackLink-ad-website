@@ -1,6 +1,6 @@
 # TrackLink Marketing Site — tracklink.civildigital.co.uk
 
-Production static marketing site for **TrackLink**, a live GPS fleet-tracking
+Production static marketing site for **TrackLink**, a live GPS tracking
 platform for small businesses (couriers, farms, trades, delivery and other
 field-service teams), operated by Civil Digital. Published with GitHub Pages.
 The repository root **is** the website root (no build step). Plain HTML + one
