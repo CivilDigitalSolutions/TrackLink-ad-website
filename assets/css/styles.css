@@ -269,7 +269,15 @@ h4 { font-size: var(--fs-500); }
 .card p { color: var(--muted); margin: 0; }
 
 /* ---- Steps ------------------------------------------------------------------ */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+/* Count-aware, not hard-coded to three. The two-role section on How it works has only two
+   items, and a fixed third column left an empty gap beside them 2014 the pair sat shoved to the
+   left of the page looking like something had failed to load. `auto-fit` lets the grid take its
+   column count from the content, so two roles centre as a pair and the three-step sections are
+   unchanged. */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: var(--sp-6); }
+
+/* Two wide columns would otherwise run the body text to an unreadable measure. */
+.step p { max-width: 44ch; }
 .step { text-align: center; }
 .step__num {
   width: 52px; height: 52px; margin: 0 auto var(--sp-5); border-radius: 50%;
