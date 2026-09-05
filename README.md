@@ -23,6 +23,7 @@ description on GitHub (the actual Android/Firebase app lives locally at
 ├── 404.html                  # Not-found page
 ├── CNAME                     # Pins tracklink.civildigital.co.uk
 ├── robots.txt / sitemap.xml
+├── site.webmanifest          # PWA/install metadata (name, icons, theme colour)
 ├── .nojekyll                 # So Pages doesn't run Jekyll processing over the site
 ├── images/
 │   ├── favicon.png            # 48×48, generated from the real app icon
@@ -37,6 +38,34 @@ description on GitHub (the actual Android/Firebase app lives locally at
         ├── tracklink-wordmark.svg   # Master wordmark logo (vector, as supplied)
         └── tracklink-wordmark.png   # Raster copy of the wordmark, used to compose the OG banner
 ```
+
+## SEO baseline
+
+The site has had a technical SEO pass. What is in place, so it doesn't get
+undone by accident:
+
+- **One indexable page per URL**, each with a self-referencing `<link rel="canonical">`.
+- **Titles** lead with the search term, brand last (`Live GPS Tracking for
+  Small Business Teams | TrackLink`). **Meta descriptions** are kept under
+  ~155 characters so Google doesn't truncate them.
+- **Robots directives**: indexable pages carry
+  `index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1`
+  (the `max-image-preview:large` is what allows a large thumbnail in results).
+  `404.html` is `noindex, follow`.
+- **Structured data** is a single consolidated `@graph` per page rather than
+  several loose blocks, so nodes cross-reference by `@id`:
+  `Organization` → `WebSite` → `WebPage` (+ `FAQPage` on the home page) →
+  `SoftwareApplication` with monthly and annual `Offer`s. Every value is
+  truthful and matches visible page copy — do not add `aggregateRating` or
+  `review` unless real reviews exist; fabricated ones are a manual-action risk.
+- **`sitemap.xml`** lists the three indexable URLs with `lastmod` only —
+  Google ignores `changefreq`/`priority`, so they were removed. **Update
+  `lastmod` when you change a page.**
+- **Images** carry `width`/`height` (no layout shift) and the hero mark uses
+  the 192px asset rather than the 512px master.
+
+Still outstanding — see the SEO review notes: Search Console/analytics
+verification, dedicated landing pages per audience, and the `app.` CTA domain.
 
 ## Publish (GitHub Pages, deploy from root)
 

@@ -1,0 +1,15 @@
+{
+  "name": "TrackLink — live GPS tracking for teams",
+  "short_name": "TrackLink",
+  "description": "Live GPS tracking, a real-time team map and route history for small businesses.",
+  "lang": "en-GB",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F3F7FC",
+  "theme_color": "#14224E",
+  "icons": [
+    { "src": "/assets/brand/tracklink-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/brand/tracklink-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
