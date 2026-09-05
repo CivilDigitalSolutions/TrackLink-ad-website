@@ -100,7 +100,10 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
-html, body { max-width: 100%; overflow-x: hidden; }
+/* `clip`, not `hidden`: overflow:hidden here makes <body> a scroll container,
+   which silently breaks the sticky header (it sticks to body, not the viewport).
+   `clip` guards against stray horizontal overflow without that side effect. */
+body { overflow-x: clip; }
 
 body {
   font-family: var(--font-sans);
@@ -212,17 +215,22 @@ h4 { font-size: var(--fs-500); }
     var(--tl-background);
   border-bottom: 1px solid var(--line);
 }
+/* Centred hero: the product screenshot is dense enough that a half-width
+   column made the device list illegible. Copy on top, screenshot full width. */
 .hero .container {
-  display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--sp-8);
-  align-items: center; padding-top: var(--sp-9); padding-bottom: var(--sp-9);
+  display: grid; grid-template-columns: 1fr; gap: var(--sp-6);
+  justify-items: center; text-align: center;
+  padding-top: var(--sp-7); padding-bottom: var(--sp-7);
 }
-.hero h1 { color: var(--navy); }
+.hero__copy { max-width: 46rem; }
+.hero__art { width: 100%; max-width: 1000px; }
+.hero h1 { color: var(--navy); font-size: clamp(2.1rem, 4.6vw, 3.1rem); }
 .hero h1 .accent { color: var(--brand); }
-.hero .eyebrow { display: inline-block; margin-bottom: var(--sp-5); }
-.hero__lead { font-size: var(--fs-500); color: var(--muted); max-width: 38ch; margin: var(--sp-5) 0 var(--sp-6); }
-.hero__actions { display: flex; gap: var(--sp-4); flex-wrap: wrap; }
+.hero .eyebrow { display: inline-block; margin-bottom: var(--sp-3); }
+.hero__lead { font-size: var(--fs-500); color: var(--muted); max-width: 54ch; margin: var(--sp-4) auto var(--sp-5); }
+.hero__actions { display: flex; gap: var(--sp-4); flex-wrap: wrap; justify-content: center; }
 .hero__tagline {
-  margin-top: var(--sp-6); text-transform: uppercase; letter-spacing: .12em;
+  margin-top: var(--sp-5); text-transform: uppercase; letter-spacing: .12em;
   font-size: var(--fs-300); color: var(--muted); font-weight: 600;
 }
 .hero__art { display: flex; justify-content: center; }
@@ -338,7 +346,7 @@ h4 { font-size: var(--fs-500); }
    Light header band (matches the app's light .topbar, not a navy band). */
 .page-head { background: var(--surface-alt); border-bottom: 1px solid var(--line); padding: var(--sp-8) 0; }
 .page-head h1 { color: var(--navy); }
-.page-head p { color: var(--muted); margin: var(--sp-3) 0 0; }
+.page-head p { color: var(--muted); margin: var(--sp-3) 0 0; max-width: 62ch; font-size: var(--fs-500); }
 .page-head .breadcrumb { color: var(--muted); font-size: var(--fs-300); margin-bottom: var(--sp-4); }
 .page-head .breadcrumb a { color: var(--brand); }
 .prose { max-width: var(--maxw-prose); margin: 0 auto; }
@@ -376,7 +384,7 @@ h4 { font-size: var(--fs-500); }
   .addons-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
-  .hero .container { grid-template-columns: 1fr; padding-top: var(--sp-7); padding-bottom: var(--sp-7); }
+  .hero .container { padding-top: var(--sp-7); padding-bottom: var(--sp-7); gap: var(--sp-6); }
   .hero__lead { max-width: none; }
   .features, .steps { grid-template-columns: 1fr; }
   .addons-grid { grid-template-columns: 1fr; }
@@ -396,4 +404,73 @@ h4 { font-size: var(--fs-500); }
 }
 @media (max-width: 480px) {
   .plan-card__amount { font-size: var(--fs-800); }
+}
+
+/* ---- Product screenshots ---------------------------------------------------
+   Framed so a UI screenshot reads as a screen rather than floating artwork.
+   The frame is deliberately understated — one border, one shadow — so it does
+   not compete with the cards elsewhere on the page. */
+.shot { margin: 0; }
+.shot__frame {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg);
+}
+.shot__bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px var(--sp-4); border-bottom: 1px solid var(--line);
+  background: var(--surface-alt);
+}
+.shot__bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.shot__bar em {
+  margin-left: var(--sp-3); font-style: normal; font-size: 11px; font-weight: 600;
+  letter-spacing: .04em; color: var(--muted);
+}
+.shot img { display: block; width: 100%; height: auto; }
+.shot figcaption {
+  margin-top: var(--sp-3); font-size: var(--fs-300); color: var(--muted); text-align: center;
+}
+
+/* Phone render: no frame, it carries its own device shell and shadow. */
+.shot--phone .shot__frame {
+  background: none; border: 0; box-shadow: none; border-radius: 0;
+}
+.shot--phone img { max-width: 340px; margin: 0 auto; }
+
+/* ---- Alternating feature rows ---------------------------------------------- */
+.feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8);
+  align-items: center; margin-top: var(--sp-8);
+}
+.feature-row + .feature-row { margin-top: var(--sp-9); }
+.feature-row--flip .feature-row__copy { order: 2; }
+.feature-row__copy h3 { font-size: var(--fs-700); margin-bottom: var(--sp-3); }
+.feature-row__copy p { color: var(--muted); }
+.feature-row__copy p + p { margin-top: var(--sp-3); }
+.feature-row__copy .eyebrow { display: block; margin-bottom: var(--sp-3); }
+.spec-list { list-style: none; padding: 0; margin: var(--sp-5) 0 0; display: grid; gap: var(--sp-2); }
+.spec-list li { display: flex; gap: var(--sp-3); color: var(--body); font-size: var(--fs-300); }
+.spec-list li::before { content: "✓"; color: var(--brand); font-weight: 700; flex-shrink: 0; }
+
+/* ---- Breadcrumbs ------------------------------------------------------------ */
+.breadcrumb { color: var(--muted); font-size: var(--fs-300); margin-bottom: var(--sp-4); }
+.breadcrumb a { color: var(--brand); }
+.breadcrumb ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.breadcrumb li + li::before { content: "/"; margin-right: var(--sp-2); color: var(--line); }
+
+/* ---- Section "read more" link ----------------------------------------------- */
+.more {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  font-weight: 600; margin-top: var(--sp-5);
+}
+.more::after { content: "→"; transition: transform .15s ease; }
+.more:hover::after { transform: translateX(3px); }
+.section-foot { text-align: center; margin-top: var(--sp-7); }
+
+/* ---- Nav current state ------------------------------------------------------ */
+.nav__links a[aria-current="page"] { color: var(--brand); font-weight: 700; }
+
+@media (max-width: 860px) {
+  .feature-row { grid-template-columns: 1fr; gap: var(--sp-6); }
+  .feature-row--flip .feature-row__copy { order: 0; }
+  .feature-row + .feature-row { margin-top: var(--sp-8); }
 }

@@ -17,18 +17,27 @@ description on GitHub (the actual Android/Firebase app lives locally at
 
 ```
 /
-├── index.html                # Home page (hero, features, how it works, pricing, FAQ, CTA)
-├── privacy/index.html        # Privacy Policy (placeholder — see callout on the page)
-├── terms/index.html          # Terms & Conditions (placeholder — see callout on the page)
+├── index.html                # Home — hero + a summary of each section, linking out
+├── features/index.html       # Features in detail (3 product screenshots)
+├── how-it-works/index.html   # The Track/Hub model, walked through in 3 steps
+├── pricing/index.html        # Full pricing: base plan, seat packs, add-ons
+├── faq/index.html            # All 10 questions (carries the FAQPage schema)
+├── privacy/index.html        # Privacy Policy
+├── terms/index.html          # Terms & Conditions
 ├── 404.html                  # Not-found page
 ├── CNAME                     # Pins tracklink.civildigital.co.uk
 ├── robots.txt / sitemap.xml
 ├── site.webmanifest          # PWA/install metadata (name, icons, theme colour)
 ├── .nojekyll                 # So Pages doesn't run Jekyll processing over the site
+├── tools/build-pages.py      # Optional page generator — see "Editing pages" below
 ├── images/
 │   ├── favicon.png            # 48×48, generated from the real app icon
 │   ├── apple-touch-icon.png   # 180×180, generated from the real app icon
-│   └── og-default.png         # 1200×630 Open Graph banner, composed from the real logo assets
+│   ├── og-default.png         # 1200×630 Open Graph banner, composed from the real logo assets
+│   └── product/               # Product UI imagery — see "Product imagery" below
+│       ├── hub-live-map.{png,webp}
+│       ├── hub-route-history.{png,webp}
+│       └── track-app.{png,webp}
 └── assets/
     ├── css/styles.css         # Shared stylesheet — TrackLink's real brand tokens
     ├── js/main.js             # Mobile nav toggle + footer year, progressive enhancement only
@@ -38,6 +47,60 @@ description on GitHub (the actual Android/Firebase app lives locally at
         ├── tracklink-wordmark.svg   # Master wordmark logo (vector, as supplied)
         └── tracklink-wordmark.png   # Raster copy of the wordmark, used to compose the OG banner
 ```
+
+## Editing pages
+
+The site is served as plain static HTML — there is no build step in the deploy
+path, and you can edit any `.html` file directly and push.
+
+There *is* an optional generator, `tools/build-pages.py`, which emits the five
+marketing pages from one shared template so the header, footer and `<head>`
+boilerplate cannot drift across eight files. Its output is what is committed.
+
+```
+python3 tools/build-pages.py
+```
+
+**It overwrites `index.html`, `features/`, `how-it-works/`, `pricing/` and
+`faq/`.** If you hand-edit one of those, either port the change back into the
+script or stop running it. `privacy/`, `terms/` and `404.html` are maintained
+by hand — the script only patches their nav and footer links, rerunnably.
+
+If you change the navigation, the footer or anything else in the page chrome,
+doing it in the script and re-running is far less error-prone than editing
+eight files.
+
+## Product imagery — constructed renders, NOT screen captures
+
+**Read this before treating the images in `images/product/` as photographs of
+the running product.** They are HTML/SVG renders, built to match the app's own
+design tokens and documented behaviour, then screenshotted headlessly. They
+were produced this way because the build environment could not reach the live
+Hub (`app.tracklink.civildigital.co.uk` and `tracklink-a9030.web.app` are both
+outside its network policy, and the Hub is a sign-in surface in any case).
+
+What that means in practice:
+
+- **The layout is inferred, not observed.** Sidebar order, control placement
+  and labelling are a reasonable reconstruction from `TRACKLINK_DESIGN_BUILD.md`
+  and the feature list — they are not guaranteed to match what a Hub user
+  actually sees. Check them against the real app before relying on them.
+- **The data is invented and deliberately generic.** "Bedford Couriers",
+  "Jamie M.", the speeds, battery levels and dwell times are made up. No real
+  customer, employee or location appears in any of them.
+- **The map is drawn, not tiled.** It is a generated SVG suggesting a UK market
+  town, so there is no Google/Mapbox/OpenStreetMap tile licensing question and
+  no third-party network request from the marketing site. Street names are
+  Bedford's; the geometry is not.
+
+**Replace them with real captures when you can** — a genuine screenshot of the
+Hub will always be more convincing than a reconstruction, and removes the risk
+of the site showing a UI that no longer matches the product. Drop the new files
+in at the same paths and dimensions and nothing else needs to change; the
+`<picture>` elements already prefer WebP with a PNG fallback.
+
+Colours in the renders come from the same `--tl-*` tokens as the site, so they
+stay consistent with the brand if the palette ever moves.
 
 ## SEO baseline
 
@@ -58,14 +121,23 @@ undone by accident:
   `SoftwareApplication` with monthly and annual `Offer`s. Every value is
   truthful and matches visible page copy — do not add `aggregateRating` or
   `review` unless real reviews exist; fabricated ones are a manual-action risk.
-- **`sitemap.xml`** lists the three indexable URLs with `lastmod` only —
+- **`sitemap.xml`** lists the seven indexable URLs with `lastmod` only —
   Google ignores `changefreq`/`priority`, so they were removed. **Update
   `lastmod` when you change a page.**
 - **Images** carry `width`/`height` (no layout shift) and the hero mark uses
   the 192px asset rather than the 512px master.
 
-Still outstanding — see the SEO review notes: Search Console/analytics
-verification, dedicated landing pages per audience, and the `app.` CTA domain.
+- **One page per topic.** The home page was a single URL with anchor links,
+  which meant features, pricing and the FAQ all competed for the same URL.
+  Each now has its own page, its own title and its own canonical; the home
+  page keeps a short summary of each and links out.
+- **`position: sticky` needs care.** `html, body { overflow-x: hidden }` used
+  to make `<body>` a scroll container, which silently stopped the header
+  sticking. It is now `body { overflow-x: clip }` — do not change it back.
+
+Still outstanding: an analytics tag (Search Console is registered, but there is
+no GA4 or equivalent in the repo) and per-audience landing pages
+(courier / farm / trades / field service).
 
 ## Publish (GitHub Pages, deploy from root)
 
@@ -74,39 +146,20 @@ verification, dedicated landing pages per audience, and the `app.` CTA domain.
 3. **DNS** at your registrar: `tracklink` as `CNAME` → `civildigitalsolutions.github.io` (or your GitHub Pages target — confirm the exact org/user Pages hostname in the repo's Pages settings once enabled).
 4. Enable **Enforce HTTPS** once the certificate provisions.
 
-## App URL (single swap point) — needs owner attention
+## App URL (single swap point)
 
-Every "Start free trial" button points at `https://app.tracklink.civildigital.co.uk`.
-That domain is **not wired up yet**. As of this build:
+Every "Start free trial" button points at `https://app.tracklink.civildigital.co.uk`,
+which the owner has confirmed is **live and serving the web Hub**.
 
-- The **Hub web dashboard** is confirmed live in production at
-  `https://tracklink-a9030.web.app` (Firebase Hosting), per the app repo's
-  `CLAUDE.md` build log ("PRODUCTION WEB LIVE"). It is a **sign-in** surface
-  (existing Hub accounts + new-org creation via the auth screen) — read+write
-  for Hub users.
-- The **Android app** (`com.tracklink.app`) is feature-complete and has a
-  signed release build tested on physical devices, but per
-  `PLAY_BILLING_DEPLOYMENT.md`'s own checklist, the **Play Console app/listing
-  has not been created yet** — there is no public Play Store page to link to.
-  Do not link to a Play Store URL until the owner confirms one exists.
-- `app.tracklink.civildigital.co.uk` as a custom domain for the web Hub is
-  **not yet configured** (no DNS record, no Firebase Hosting custom-domain
-  link) — this mirrors the exact same open item the Dispatch marketing site
-  flagged for `app.dispatch.civildigital.co.uk`.
+To repoint it, find-and-replace the exact string
+`https://app.tracklink.civildigital.co.uk` across all HTML files — it appears
+in the nav, hero, pricing card, CTA section and footer of every page.
 
-**Owner action needed:** either (a) point `app.tracklink.civildigital.co.uk`
-at the Firebase-hosted web Hub via a custom domain, or (b) tell me to swap
-every "Start free trial" link to `https://tracklink-a9030.web.app` directly
-until the custom domain exists. To change it, find-and-replace the exact
-string `https://app.tracklink.civildigital.co.uk` across all HTML files — it
-appears in the nav, hero, pricing card, CTA section and footer of every page.
+Do **not** link to a Play Store URL until the owner confirms the Play Console
+listing exists; as of the last check it had not been created.
 
-Because public sign-up status was genuinely ambiguous at build time (backend
-and billing are live in production, but the Play listing isn't public and the
-marketing funnel isn't wired up), the site deliberately avoids "now live"
-banner language and routes primary interest through the free-trial link *and*
-a `mailto:info@civildigital.co.uk` fallback everywhere, so a visitor can
-always reach a real human either way.
+Every page also carries a `mailto:info@civildigital.co.uk` fallback alongside
+the trial link, so a visitor can always reach a real human either way.
 
 ## Logo & brand assets
 
