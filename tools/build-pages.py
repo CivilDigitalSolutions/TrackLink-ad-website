@@ -455,11 +455,11 @@ ADDONS = """
           </div>
           <div class="addon-card">
             <h4>History retention</h4>
-            <p class="addon-rate">&pound;15 per user / month</p>
+            <p class="addon-rate">&pound;15 per seat / month</p>
             <table>
               <caption class="visually-hidden">History retention pricing</caption>
               <tr><td>30 days (default)</td><td>Included</td></tr>
-              <tr><td>365 days (add-on)</td><td>&pound;15/user/mo</td></tr>
+              <tr><td>365 days (add-on)</td><td>&pound;15/seat/mo</td></tr>
             </table>
           </div>
         </div>
@@ -840,7 +840,7 @@ pricing = (
       <div class="container">
 {PLAN_CARD}
 {ADDONS}
-        <p class="pricing-note">Every add-on is billed monthly or annually (annual &asymp; 10&times; the monthly rate, roughly 2 months free). Need a bigger team or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
+        <p class="pricing-note">History retention is priced per seat and applies to every seat on the account, Track and Hub alike &mdash; so on the base plan (1 Hub + 3 Track), 365-day history is &pound;60/month. Every add-on is billed monthly or annually (annual &asymp; 10&times; the monthly rate, roughly 2 months free). Need a bigger team or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
       </div>
     </section>
 
