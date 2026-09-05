@@ -265,7 +265,7 @@ app's `CLAUDE.md` "Key product decisions" section — all three agree:
 | +15 Track seats | **£75** | £750 |
 | +2 Hub seats | **£12** | £120 |
 | +4 Hub seats | **£24** | £240 |
-| History retention add-on (30 → 365 days) | **£15 flat, org-wide** | ~£150 |
+| History retention add-on (30 → 365 days) | **£15 per user** | ~£150 per user |
 
 The 14-day free trial is granted server-side at org creation (no card
 required), per the same source. The site does not show Stripe's ~10%-cheaper
@@ -275,6 +275,12 @@ keeping the public site consistent with the product's own pricing-display
 policy.
 
 **Nothing on this page is a placeholder.** No feature or price was invented.
+
+**One deliberate divergence from the app repo:** the history-retention add-on
+is advertised here at **£15 per user per month**, on the owner's instruction.
+`PLAY_BILLING_DEPLOYMENT.md` specifies it as a flat, org-wide £15/month. If the
+billing system still charges a flat rate, the site and the product disagree —
+reconcile them before taking payment on this basis.
 
 ## Feature copy — sourced from the app repo
 

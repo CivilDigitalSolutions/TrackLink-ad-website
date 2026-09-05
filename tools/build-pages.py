@@ -380,7 +380,7 @@ FEATURE_CARDS = {
                 <path d="M3.5 19c.5-3 2.7-4.5 5-4.5s4.5 1.5 5 4.5" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round"/>
                 <path d="M14.5 19c.4-2.2 1.9-3.4 3.5-3.4" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round"/>
               </svg>""", "Custom groups",
-     "Organise Track users into your own groups &mdash; &ldquo;Motorcycle fleet&rdquo;, &ldquo;Car fleet&rdquo;, whatever fits &mdash; then filter the map and device list by group in one tap."),
+     "Organise Track users into your own groups &mdash; &ldquo;Morning shift&rdquo;, &ldquo;North round&rdquo;, whatever fits &mdash; then filter the map and device list by group in one tap."),
     "hubs": ("""<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="4" y="3" width="16" height="18" rx="2" stroke="#14224E" stroke-width="1.8"/>
                 <path d="M7.5 8h9M7.5 12h9M7.5 16h5.5" stroke="#14224E" stroke-width="1.8" stroke-linecap="round"/>
@@ -455,11 +455,11 @@ ADDONS = """
           </div>
           <div class="addon-card">
             <h4>History retention</h4>
-            <p class="addon-rate">Flat rate, org-wide</p>
+            <p class="addon-rate">&pound;15 per user / month</p>
             <table>
               <caption class="visually-hidden">History retention pricing</caption>
               <tr><td>30 days (default)</td><td>Included</td></tr>
-              <tr><td>365 days (add-on)</td><td>&pound;15/mo</td></tr>
+              <tr><td>365 days (add-on)</td><td>&pound;15/user/mo</td></tr>
             </table>
           </div>
         </div>
@@ -470,8 +470,8 @@ FAQS = [
      "TrackLink&rsquo;s tracking, live map and billing are built and running in production. We&rsquo;re finishing public sign-up rollout, so <a href=\"mailto:info@civildigital.co.uk\">get in touch</a> and we&rsquo;ll get your team set up directly.",
      "TrackLink's tracking, live map and billing are built and running in production. We're finishing public sign-up rollout, so get in touch and we'll get your team set up directly."),
     ("Do I need a tracker box or any hardware?",
-     "No. TrackLink runs on the phone your driver or field worker already carries &mdash; there is no box to fit, no installer to book and nothing to move between vehicles.",
-     "No. TrackLink runs on the phone your driver or field worker already carries — there is no box to fit, no installer to book and nothing to move between vehicles."),
+     "No. TrackLink runs on the phone your team member already carries &mdash; there is no box to fit, no installer to book and nothing to move when someone changes vehicle.",
+     "No. TrackLink runs on the phone your team member already carries — there is no box to fit, no installer to book and nothing to move when someone changes vehicle."),
     ("What does TrackLink cost?",
      "TrackLink starts at &pound;18/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days &mdash; see <a href=\"/pricing/\">full pricing</a>.",
      "TrackLink starts at £18/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days."),
@@ -487,8 +487,11 @@ FAQS = [
     ("Can a Track user turn tracking off?",
      "Yes. Only the person holding a device can switch its tracking on or off &mdash; TrackLink gives no one a remote switch over someone else&rsquo;s phone. Employers are responsible for using tracking lawfully, which in the UK generally means telling staff what is monitored and why.",
      "Yes. Only the person holding a device can switch its tracking on or off — TrackLink gives no one a remote switch over someone else's phone. Employers are responsible for using tracking lawfully, which in the UK generally means telling staff what is monitored and why."),
+    ("Who controls billing &mdash; every Hub user?",
+     "No. The account owner is the single person who controls the subscription: the payment method, plan changes, buying and removing seats, and cancellation. Other Hub users can use everything day to day &mdash; the live map, route history, groups and members &mdash; but cannot change what your organisation is paying. The owner is not an extra seat; they are one of your Hub users.",
+     "No. The account owner is the single person who controls the subscription: the payment method, plan changes, buying and removing seats, and cancellation. Other Hub users can use everything day to day — the live map, route history, groups and members — but cannot change what your organisation is paying. The owner is not an extra seat; they are one of your Hub users."),
     ("Can more than one person manage the team?",
-     "Yes &mdash; an organisation can have any number of Hub users, and every Hub sees every Track device. You can also organise Track users into custom groups (e.g. &ldquo;Motorcycle fleet&rdquo;) and filter the map by group.",
+     "Yes &mdash; an organisation can have any number of Hub users, and every Hub sees every Track device. You can also organise Track users into custom groups (e.g. &ldquo;Morning shift&rdquo;) and filter the map by group.",
      "Yes — an organisation can have any number of Hub users, and every Hub sees every Track device. You can also organise Track users into custom groups and filter the map by group."),
     ("How long is location history kept?",
      "Live location is overwritten on every update. Stored route history is kept for 30 days by default, or 365 days with the retention add-on; older points are deleted automatically once they expire.",
@@ -550,7 +553,7 @@ home = (
         <div class="hero__copy">
           <span class="eyebrow">GPS tracking for teams</span>
           <h1>Live GPS tracking for teams, <span class="accent">without the guesswork</span>.</h1>
-          <p class="hero__lead">TrackLink links every driver, vehicle or field worker to a live map your whole business can trust &mdash; built for couriers, farms, trades and delivery teams who need simple, honest location tracking.</p>
+          <p class="hero__lead">TrackLink links every person on your team to a live map your whole business can trust &mdash; built for couriers, farms, trades and delivery teams who need simple, honest location tracking.</p>
           <div class="hero__actions">
             <a class="btn btn--primary btn--lg" href="{APP}">Start free trial</a>
             <a class="btn btn--secondary btn--lg" href="/features/">See what&rsquo;s included</a>
@@ -569,7 +572,7 @@ home = (
         <div class="section-head">
           <p class="eyebrow">What TrackLink does</p>
           <h2 id="features-h">Everything a team needs to stay in sync</h2>
-          <p>Two simple roles &mdash; Track and Hub &mdash; cover the whole job: drivers report their position, and the business sees exactly where everyone is.</p>
+          <p>Two simple roles &mdash; Track and Hub &mdash; cover the whole job: Track users report their position, and the business sees exactly where everyone is.</p>
         </div>
         <div class="features">
 {cards(["tracking", "map", "history", "groups", "hubs", "isolation"])}
@@ -589,7 +592,7 @@ home = (
           <div class="step">
             <span class="step__num" aria-hidden="true">1</span>
             <h3>Track toggles on</h3>
-            <p>A driver or field worker opens the app and toggles tracking on. Location uploads automatically in the background &mdash; no fiddling required.</p>
+            <p>A team member opens the app and toggles tracking on. Location uploads automatically in the background &mdash; no fiddling required.</p>
           </div>
           <div class="step">
             <span class="step__num" aria-hidden="true">2</span>
@@ -652,17 +655,17 @@ features = (
     )
     + header("/features/")
     + page_head("Features", "Everything TrackLink does",
-                "Two roles cover the whole job. Drivers and field workers report their position from the phone they already carry; the business sees every one of them on a single live map.")
+                "Two roles cover the whole job. Your team reports its position from the phones they already carry; the business sees every one of them on a single live map.")
     + f"""
     <section class="section">
       <div class="container">
 
         <div class="feature-row">
           <div class="feature-row__copy">
-            <span class="eyebrow">On the driver&rsquo;s phone</span>
+            <span class="eyebrow">On the team member&rsquo;s phone</span>
             <h3>Live GPS tracking that stays out of the way</h3>
             <p>A Track user opens the app, toggles tracking on and gets on with the job. Location uploads in the background at the interval you choose, and an ongoing notification makes it obvious that tracking is running &mdash; no silent monitoring.</p>
-            <p>No tracker box, no installer, nothing to move between vehicles. If someone swaps van, their phone goes with them.</p>
+            <p>No tracker box, no installer, nothing to fit to a vehicle. If someone changes vehicle, their phone goes with them.</p>
             <ul class="spec-list">
               <li>Update every 30 seconds, 60 seconds or 5 minutes</li>
               <li>5-second and 1-second modes as explicit opt-ins</li>
@@ -731,7 +734,7 @@ write("features/index.html", features)
 how = (
     head(
         "How TrackLink Works: Track and Hub Explained | TrackLink",
-        "How TrackLink works in three steps: a driver toggles tracking on, the business watches the live team map, and any day&rsquo;s route can be reviewed afterwards.".replace("&rsquo;", "’"),
+        "How TrackLink works in three steps: a team member toggles tracking on, the business watches the live team map, and any day&rsquo;s route can be reviewed afterwards.".replace("&rsquo;", "’"),
         "/how-it-works/",
         graph([ORG, SITE,
                webpage("/how-it-works/", "How TrackLink works", "How TrackLink works in three steps: Track users toggle tracking on, Hub users watch the live map, and route history is reviewable afterwards.", crumb=True),
@@ -739,7 +742,7 @@ how = (
     )
     + header("/how-it-works/")
     + page_head("How it works", "How TrackLink works",
-                "There are only two roles to understand, and one of them takes about ten seconds to explain to a driver.")
+                "There are only two roles to understand, and one of them takes about ten seconds to explain to the person carrying the phone.")
     + f"""
     <section class="section">
       <div class="container">
@@ -752,12 +755,12 @@ how = (
           <div class="step">
             <span class="step__num" aria-hidden="true">T</span>
             <h3>Track &mdash; the person on the move</h3>
-            <p>A driver, rider or field worker. They install the app, join your organisation and toggle tracking on when they start work. One Track seat is one tracked device.</p>
+            <p>Anyone on your team who is out and about. They install the app, join your organisation and toggle tracking on when they start work. One Track seat is one tracked device.</p>
           </div>
           <div class="step">
             <span class="step__num" aria-hidden="true">H</span>
             <h3>Hub &mdash; the person who needs to know</h3>
-            <p>An owner, dispatcher or manager. They see every device on the live map, review route history and manage groups and seats. One Hub seat is one admin.</p>
+            <p>An owner, dispatcher or manager. They see every device on the live map, review route history and manage groups and members. One Hub seat is one such person &mdash; and one of them, the account owner, also controls the billing.</p>
           </div>
         </div>
       </div>
@@ -769,9 +772,9 @@ how = (
         <div class="feature-row">
           <div class="feature-row__copy">
             <span class="eyebrow">Step 1</span>
-            <h3>The driver toggles tracking on</h3>
+            <h3>The team member toggles tracking on</h3>
             <p>One switch, at the start of the shift. Location then uploads in the background at whatever interval the organisation has set &mdash; typically every 30 seconds &mdash; and an ongoing notification sits in the tray so it is never a secret that tracking is running.</p>
-            <p>If they drive through a signal blackspot, fixes queue on the phone and flush automatically the moment it reconnects. Nothing is lost; it just arrives a little later.</p>
+            <p>If they pass through a signal blackspot, fixes queue on the phone and flush automatically the moment it reconnects. Nothing is lost; it just arrives a little later.</p>
           </div>
           {shot("phone", "", phone=True)}
         </div>
@@ -780,7 +783,7 @@ how = (
           <div class="feature-row__copy">
             <span class="eyebrow">Step 2</span>
             <h3>The business watches the map</h3>
-            <p>A Hub user opens the live map and sees everyone at once &mdash; who is moving, who is parked, who has gone quiet. Markers move on their own within five seconds of an upload, so nobody is refreshing a page to find out where a van is.</p>
+            <p>A Hub user opens the live map and sees everyone at once &mdash; who is moving, who is parked, who has gone quiet. Markers move on their own within five seconds of an upload, so nobody is refreshing a page to find out where someone is.</p>
             <p>Got more than one kind of team? Put them in groups and filter the map down to just the one you care about.</p>
           </div>
           {shot("map", "Hub &middot; Live map")}
@@ -845,22 +848,30 @@ pricing = (
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">The one thing to get right</p>
-          <h2>What counts as a seat?</h2>
-          <p>Nearly every pricing question comes down to this, so here it is plainly.</p>
+          <h2>Track, Hub, and the account owner</h2>
+          <p>Two kinds of seat, and one role that sits on top of them. Nearly every pricing question comes down to these, so here they are plainly.</p>
         </div>
         <div class="steps">
           <div class="step">
             <span class="step__num" aria-hidden="true">T</span>
             <h3>A Track seat is one tracked device</h3>
-            <p>One phone reporting its location. If a driver swaps van, the seat goes with them &mdash; you are paying per person, not per vehicle.</p>
+            <p>One phone reporting its location. A Track user switches their own tracking on and off and reports their position &mdash; they are not watching anyone else&rsquo;s.</p>
+            <p>If someone changes vehicle, the seat goes with them: you are paying per person, not per vehicle.</p>
           </div>
           <div class="step">
             <span class="step__num" aria-hidden="true">H</span>
-            <h3>A Hub seat is one admin</h3>
-            <p>One owner, dispatcher or manager who can see the live map, review history and manage the team. Every Hub sees every device.</p>
+            <h3>A Hub seat is one person who can see the team</h3>
+            <p>They see every device on the live map, review route history, and manage groups and members. Every Hub user sees every Track device &mdash; there is no partial view.</p>
+            <p>Add as many as you need. Hub users run the day to day, but they cannot change what your organisation is paying.</p>
+          </div>
+          <div class="step">
+            <span class="step__num" aria-hidden="true">&pound;</span>
+            <h3>The account owner holds the billing</h3>
+            <p>One person &mdash; and only one &mdash; controls the subscription: the payment method, plan changes, buying and removing seats, and cancellation.</p>
+            <p><strong>The owner is not an extra seat.</strong> They are one of your Hub users, with the finances attached. So a team of one owner plus two managers needs three Hub seats, not four.</p>
           </div>
         </div>
-        <p class="section-foot"><a class="more" href="/how-it-works/">See how the two roles work together</a></p>
+        <p class="section-foot"><a class="more" href="/how-it-works/">See how Track and Hub work together</a></p>
       </div>
     </section>
 
@@ -887,11 +898,11 @@ write("pricing/index.html", pricing)
 faq_page = (
     head(
         "TrackLink FAQ: GPS Tracking Questions Answered | TrackLink",
-        "Answers on TrackLink pricing, update intervals, hardware, offline behaviour, data retention, data isolation and cancellation.",
+        "Answers on TrackLink pricing, update intervals, hardware, offline behaviour, data retention, data isolation, billing control and cancellation.",
         "/faq/",
         graph([ORG, SITE,
                dict(webpage("/faq/", "TrackLink frequently asked questions",
-                            "Answers on TrackLink pricing, update intervals, hardware, offline behaviour, data retention, data isolation and cancellation.",
+                            "Answers on TrackLink pricing, update intervals, hardware, offline behaviour, data retention, data isolation, billing control and cancellation.",
                             crumb=True, types=["WebPage", "FAQPage"]),
                     **{"mainEntity": faq_schema(FAQS)}),
                breadcrumb("/faq/", "FAQ"), APP_NODE]),
