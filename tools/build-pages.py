@@ -197,17 +197,28 @@ def page_head(crumb, h1, sub):
 
 
 IMAGES = {
-    "map": ("hub-live-map", 2240, 1400, "TrackLink Hub live map",
+    "map": ("hub-live-map", 2240, 1400, "TrackLink Hub &mdash; live team map",
             "The TrackLink Hub live map: five tracked devices on one map with a device list showing speed, group, battery and last-seen time."),
-    "route": ("hub-route-history", 2240, 1400, "TrackLink Hub route history",
+    "route": ("hub-route-history", 2240, 1400, "TrackLink Hub &mdash; route history",
               "The TrackLink Hub route history view: a full day's route with numbered stops, dwell times, distance, moving time and speed."),
-    "phone": ("track-app", 680, 1330, "TrackLink Track app",
+    "phone": ("track-app", 680, 1330, "The TrackLink Track app",
               "The TrackLink Track app on a phone, showing tracking switched on, the update-interval selector and the ongoing notification."),
 }
 
 
+ZOOM_CUE = (
+    '<span class="shot__cue" aria-hidden="true">'
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'
+    '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6M11 8.4v5.2M8.4 11h5.2" stroke-linecap="round"/>'
+    '</svg></span>')
+
+
 def shot(key, bar_label, caption=None, eager=False, phone=False):
-    base, w, h, _, alt = IMAGES[key]
+    """A framed screenshot that opens full size in a lightbox when clicked.
+
+    The wrapper is a real <a> to the full-resolution file, so with JavaScript
+    off a click still opens the image — main.js only intercepts it."""
+    base, w, h, title, alt = IMAGES[key]
     cls = "shot shot--phone" if phone else "shot"
     bar = "" if phone else (
         '<div class="shot__bar" aria-hidden="true"><span></span><span></span><span></span>'
@@ -217,10 +228,15 @@ def shot(key, bar_label, caption=None, eager=False, phone=False):
     cap = f'\n            <figcaption>{caption}</figcaption>' if caption else ""
     return f"""<figure class="{cls}">
             <div class="shot__frame">{bar}
-              <picture>
-                <source srcset="/images/product/{base}.webp" type="image/webp">
-                <img src="/images/product/{base}.png" alt="{alt}" width="{w}" height="{h}" {loading} decoding="async">
-              </picture>
+              <a class="shot__zoom" href="/images/product/{base}.png"
+                 data-webp="/images/product/{base}.webp" data-title="{title}"
+                 aria-label="View a larger version: {title}">
+                <picture>
+                  <source srcset="/images/product/{base}.webp" type="image/webp">
+                  <img src="/images/product/{base}.png" alt="{alt}" width="{w}" height="{h}" {loading} decoding="async">
+                </picture>
+                {ZOOM_CUE}
+              </a>
             </div>{cap}
           </figure>"""
 
