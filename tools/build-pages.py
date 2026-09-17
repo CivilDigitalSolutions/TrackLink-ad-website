@@ -146,6 +146,7 @@ FOOTER = f"""
             <li>Bedford, United Kingdom</li>
             <li><a href="/privacy/">Privacy Policy</a></li>
             <li><a href="/terms/">Terms</a></li>
+            <li><a href="/delete-account/">Delete your account</a></li>
           </ul>
         </div>
       </div>
@@ -967,7 +968,12 @@ FOOTER_BLOCK = ('            <li><a href="/features/">Features</a></li>\n'
                 '            <li><a href="/pricing/">Pricing</a></li>\n'
                 '            <li><a href="/faq/">FAQ</a></li>\n')
 
-for f in ["privacy/index.html", "terms/index.html", "404.html"]:
+# Every footer carries the account-deletion link Google Play requires (it asks for a URL
+# reachable without the app on the Data Safety form); rerunnable like the nav patch.
+DELETE_LINK = '            <li><a href="/delete-account/">Delete your account</a></li>\n'
+TERMS_LINK = '            <li><a href="/terms/">Terms</a></li>\n'
+
+for f in ["privacy/index.html", "terms/index.html", "delete-account/index.html", "404.html"]:
     p = ROOT / f
     s = p.read_text(encoding="utf-8")
 
@@ -977,6 +983,8 @@ for f in ["privacy/index.html", "terms/index.html", "404.html"]:
     s = re.sub(FOOTER_PATTERN, FOOTER_BLOCK, s, count=1)
     s = s.replace('<a href="/#pricing">current pricing</a>',
                   '<a href="/pricing/">current pricing</a>')
+    if TERMS_LINK in s and DELETE_LINK not in s:
+        s = s.replace(TERMS_LINK, TERMS_LINK + DELETE_LINK, 1)
 
     assert '<ul class="nav__links" id="primary-nav">' in s, f + ": lost the <ul>"
     assert s.count('</ul>') == s.count('<ul'), f + ": unbalanced <ul>"
