@@ -7,7 +7,11 @@ The published site is still plain static HTML with no build step: this script
 is run by hand and its OUTPUT is what gets committed and served. It exists so
 the header, footer and <head> boilerplate cannot drift across eight pages.
 
-!! IT OVERWRITES index.html, features/, how-it-works/, pricing/ and faq/ !!
+!! IT OVERWRITES index.html, features/, how-it-works/, pricing/, faq/, guides/ and sitemap.xml !!
+
+The guides (2026-09-19) are content in tools/guides/*.py — one module per topic hub, with every
+price and product claim taken from tools/guides/facts.py — rendered by this script into
+/guides/ and /guides/<slug>/.
 
 So if you hand-edit any of those five files, either port the change back into
 this script or stop using the script. It only patches (rather than rewrites)
@@ -19,6 +23,9 @@ import json, os, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = "https://tracklink.civildigital.co.uk"
 APP = "https://app.tracklink.civildigital.co.uk"
+# Where "Start free trial" goes (2026-09-19). It used to be APP, which is the Hub SIGN-IN page: a
+# new visitor could not create an organisation there. /signup creates the account + org + trial.
+SIGNUP = APP + "/signup"
 OG = BASE + "/images/og-default.png"
 
 NAV = [
@@ -26,6 +33,7 @@ NAV = [
     ("/how-it-works/", "How it works"),
     ("/pricing/", "Pricing"),
     ("/faq/", "FAQ"),
+    ("/guides/", "Guides"),
 ]
 
 BANNER = ('<strong>Free trial</strong> &nbsp;&bull;&nbsp; 14 days free '
@@ -107,7 +115,7 @@ def header(path):
       </button>
       <ul class="nav__links" id="primary-nav">
 {links}
-        <li class="nav__cta"><a class="btn btn--primary" href="{APP}">Start free trial</a></li>
+        <li class="nav__cta"><a class="btn btn--primary" href="{SIGNUP}">Start free trial</a></li>
       </ul>
     </nav>
   </header>
@@ -135,7 +143,8 @@ FOOTER = f"""
             <li><a href="/how-it-works/">How it works</a></li>
             <li><a href="/pricing/">Pricing</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="{APP}">Start free trial</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="{SIGNUP}">Start free trial</a></li>
           </ul>
         </nav>
         <div>
@@ -171,7 +180,7 @@ def cta(heading, para):
           <h2 id="trial-h">{heading}</h2>
           <p>{para}</p>
           <div class="cta__actions">
-            <a class="btn btn--primary btn--lg" href="{APP}">Start free trial</a>
+            <a class="btn btn--primary btn--lg" href="{SIGNUP}">Start free trial</a>
             <a class="btn btn--ghost btn--lg" href="mailto:info@civildigital.co.uk">Talk to us first</a>
           </div>
         </div>
@@ -307,24 +316,24 @@ APP_NODE = {
     "offers": [
         {
             "@type": "Offer", "name": "Base plan — monthly",
-            "price": "18.00", "priceCurrency": "GBP",
+            "price": "16.00", "priceCurrency": "GBP",
             "url": BASE + "/pricing/",
             "availability": "https://schema.org/InStock",
             "description": "Base plan: 1 Hub seat + 3 Track seats, billed monthly, includes a 14-day free trial.",
             "priceSpecification": {
-                "@type": "UnitPriceSpecification", "price": "18.00",
+                "@type": "UnitPriceSpecification", "price": "16.00",
                 "priceCurrency": "GBP", "billingIncrement": 1, "unitCode": "MON",
             },
             "seller": {"@id": BASE + "/#organization"},
         },
         {
             "@type": "Offer", "name": "Base plan — annual",
-            "price": "180.00", "priceCurrency": "GBP",
+            "price": "160.00", "priceCurrency": "GBP",
             "url": BASE + "/pricing/",
             "availability": "https://schema.org/InStock",
             "description": "Base plan billed annually: 1 Hub seat + 3 Track seats, two months free versus monthly billing.",
             "priceSpecification": {
-                "@type": "UnitPriceSpecification", "price": "180.00",
+                "@type": "UnitPriceSpecification", "price": "160.00",
                 "priceCurrency": "GBP", "billingIncrement": 1, "unitCode": "ANN",
             },
             "seller": {"@id": BASE + "/#organization"},
@@ -431,8 +440,8 @@ PLAN_CARD = f"""
         <div class="plan-card">
           <div>
             <h3>Base plan</h3>
-            <div class="plan-card__amount">&pound;18<small>/month</small></div>
-            <p class="plan-card__note">or &pound;180/year (2 months free)</p>
+            <div class="plan-card__amount">&pound;16<small>/month</small></div>
+            <p class="plan-card__note">or &pound;160/year (2 months free)</p>
             <ul class="plan-card__features">
               <li>1 Hub seat</li>
               <li>3 Track seats</li>
@@ -443,7 +452,7 @@ PLAN_CARD = f"""
             </ul>
           </div>
           <div class="plan-card__cta">
-            <a class="btn btn--primary btn--lg" href="{APP}">Start free trial</a>
+            <a class="btn btn--primary btn--lg" href="{SIGNUP}">Start free trial</a>
             <span class="plan-card__trial">14 days free, no card required</span>
           </div>
         </div>
@@ -453,21 +462,23 @@ ADDONS = """
         <div class="addons-grid">
           <div class="addon-card">
             <h4>Track seat packs</h4>
-            <p class="addon-rate">&pound;5 per seat / month</p>
+            <p class="addon-rate">&pound;4.40 per seat / month</p>
             <table>
               <caption class="visually-hidden">Track seat pack pricing</caption>
-              <tr><td>+5 Track seats</td><td>&pound;25/mo</td></tr>
-              <tr><td>+10 Track seats</td><td>&pound;50/mo</td></tr>
-              <tr><td>+15 Track seats</td><td>&pound;75/mo</td></tr>
+              <tr><td>+5 Track seats</td><td>&pound;22/mo</td></tr>
+              <tr><td>+10 Track seats</td><td>&pound;44/mo</td></tr>
+              <tr><td>+15 Track seats</td><td>&pound;66/mo</td></tr>
+              <tr><td>Each seat beyond +15</td><td>&pound;5/mo</td></tr>
             </table>
           </div>
           <div class="addon-card">
             <h4>Hub seat packs</h4>
-            <p class="addon-rate">&pound;6 per seat / month</p>
+            <p class="addon-rate">&pound;5.50 per seat / month</p>
             <table>
               <caption class="visually-hidden">Hub seat pack pricing</caption>
-              <tr><td>+2 Hub seats</td><td>&pound;12/mo</td></tr>
-              <tr><td>+4 Hub seats</td><td>&pound;24/mo</td></tr>
+              <tr><td>+2 Hub seats</td><td>&pound;11/mo</td></tr>
+              <tr><td>+4 Hub seats</td><td>&pound;22/mo</td></tr>
+              <tr><td>Each seat beyond +4</td><td>&pound;6/mo</td></tr>
             </table>
           </div>
           <div class="addon-card">
@@ -484,14 +495,14 @@ ADDONS = """
 
 FAQS = [
     ("Is TrackLink available yet?",
-     "TrackLink&rsquo;s tracking, live map and billing are built and running in production. We&rsquo;re finishing public sign-up rollout, so <a href=\"mailto:info@civildigital.co.uk\">get in touch</a> and we&rsquo;ll get your team set up directly.",
-     "TrackLink's tracking, live map and billing are built and running in production. We're finishing public sign-up rollout, so get in touch and we'll get your team set up directly."),
+     f"Yes. <a href=\"{SIGNUP}\">Create your organisation</a> on the web and start a 14-day free trial &mdash; no card needed &mdash; then invite your team. The people being tracked use the TrackLink Android app; managers use the web dashboard or the app.",
+     "Yes. Create your organisation on the web and start a 14-day free trial — no card needed — then invite your team. The people being tracked use the TrackLink Android app; managers use the web dashboard or the app."),
     ("Do I need a tracker box or any hardware?",
      "No. TrackLink runs on the phone your team member already carries &mdash; there is no box to fit, no installer to book and nothing to move when someone changes vehicle.",
      "No. TrackLink runs on the phone your team member already carries — there is no box to fit, no installer to book and nothing to move when someone changes vehicle."),
     ("What does TrackLink cost?",
-     "TrackLink starts at &pound;18/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days &mdash; see <a href=\"/pricing/\">full pricing</a>.",
-     "TrackLink starts at £18/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days."),
+     "TrackLink starts at &pound;16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days &mdash; see <a href=\"/pricing/\">full pricing</a>.",
+     "TrackLink starts at £16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days."),
     ("How often does TrackLink update a device&rsquo;s location?",
      "The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance so you know the trade-off before you turn them on.",
      "The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance."),
@@ -553,11 +564,11 @@ home_faqs = FAQS[:4]
 home = (
     head(
         "Live GPS Tracking for Small Business Teams | TrackLink",
-        "Live GPS tracking, a real-time team map and route history for UK couriers, farms, trades and field teams. From &pound;18/month with a 14-day free trial.".replace("&pound;", "£"),
+        "Live GPS tracking, a real-time team map and route history for UK couriers, farms, trades and field teams. From &pound;16/month with a 14-day free trial.".replace("&pound;", "£"),
         "/",
         graph([ORG, SITE,
                webpage("/", "Live GPS Tracking for Small Business Teams | TrackLink",
-                       "Live GPS tracking, a real-time team map and route history for UK couriers, farms, trades and field teams. From £18/month with a 14-day free trial."),
+                       "Live GPS tracking, a real-time team map and route history for UK couriers, farms, trades and field teams. From £16/month with a 14-day free trial."),
                APP_NODE]),
         og_title="TrackLink — live GPS tracking for teams",
         og_desc="Live location tracking, a real-time team map, route history and simple seat-based pricing — built for couriers, farms, trades and field-service teams.",
@@ -572,7 +583,7 @@ home = (
           <h1>Live GPS tracking for teams, <span class="accent">without the guesswork</span>.</h1>
           <p class="hero__lead">TrackLink links every person on your team to a live map your whole business can trust &mdash; built for couriers, farms, trades and delivery teams who need simple, honest location tracking.</p>
           <div class="hero__actions">
-            <a class="btn btn--primary btn--lg" href="{APP}">Start free trial</a>
+            <a class="btn btn--primary btn--lg" href="{SIGNUP}">Start free trial</a>
             <a class="btn btn--secondary btn--lg" href="/features/">See what&rsquo;s included</a>
           </div>
           <p class="hero__tagline">Track with certainty. Link with trust.</p>
@@ -842,11 +853,11 @@ write("how-it-works/index.html", how)
 # ---------- pricing ----------
 pricing = (
     head(
-        "Pricing: GPS Tracking from &pound;18 a Month | TrackLink".replace("&pound;", "£"),
-        "TrackLink pricing: £18/month for 1 Hub seat and 3 Track seats, with a 14-day free trial. Track and Hub seat packs, plus an optional 365-day history add-on.",
+        "Pricing: GPS Tracking from &pound;16 a Month | TrackLink".replace("&pound;", "£"),
+        "TrackLink pricing: £16/month for 1 Hub seat and 3 Track seats, with a 14-day free trial. Track and Hub seat packs, plus an optional 365-day history add-on.",
         "/pricing/",
         graph([ORG, SITE,
-               webpage("/pricing/", "TrackLink pricing", "TrackLink pricing: £18/month for 1 Hub seat and 3 Track seats with a 14-day free trial, plus Track and Hub seat packs and a history retention add-on.", crumb=True),
+               webpage("/pricing/", "TrackLink pricing", "TrackLink pricing: £16/month for 1 Hub seat and 3 Track seats with a 14-day free trial, plus Track and Hub seat packs and a history retention add-on.", crumb=True),
                breadcrumb("/pricing/", "Pricing"), APP_NODE]),
     )
     + header("/pricing/")
@@ -858,6 +869,7 @@ pricing = (
 {PLAN_CARD}
 {ADDONS}
         <p class="pricing-note">History retention is priced per seat and applies to every seat on the account, Track and Hub alike &mdash; so on the base plan (1 Hub + 3 Track), 365-day history is &pound;60/month. Every add-on is billed monthly or annually (annual &asymp; 10&times; the monthly rate, roughly 2 months free). Need a bigger team or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
+        <p class="pricing-note">Prices shown are for signing up on the web. Subscribing inside the Android app through Google Play costs a little more (&pound;18 base plan, &pound;25 Track pack, &pound;12 Hub pack), because Google takes a larger share of in-app payments.</p>
       </div>
     </section>
 
@@ -944,6 +956,265 @@ faq_page = (
 write("faq/index.html", faq_page)
 
 
+
+# --------------------------------------------------------------------------
+# guides (2026-09-19) — SEO articles built from tools/guides/*.py
+# --------------------------------------------------------------------------
+import sys
+sys.path.insert(0, str(ROOT / "tools" / "guides"))
+import costs as _g_costs, law as _g_law, tech as _g_tech, industry as _g_industry, assets as _g_assets  # noqa: E402
+
+GUIDES_UPDATED = "2026-09-19"
+GUIDES_UPDATED_TEXT = "19 September 2026"
+
+HUBS = [
+    ("costs", "Costs and choosing a tracker",
+     "What GPS tracking costs, what to look for and how to pick the right kind of tracker."),
+    ("law", "UK law and privacy",
+     "Tracking staff, vehicles and phones lawfully under UK data protection law &mdash; and your rights if you are the one being tracked."),
+    ("tech", "Accuracy, battery and how GPS works",
+     "How accurate GPS is, how often trackers update, what blocks the signal and how long batteries last."),
+    ("industry", "GPS tracking by industry",
+     "How trades, contractors, delivery firms and other mobile teams use GPS tracking day to day."),
+    ("assets", "Assets, equipment and theft",
+     "Tracking trailers, plant and equipment &mdash; and when you need a hardware tracker rather than an app."),
+]
+HUB_NAMES = {k: name for k, name, _ in HUBS}
+
+GUIDES = _g_costs.GUIDES + _g_law.GUIDES + _g_tech.GUIDES + _g_industry.GUIDES + _g_assets.GUIDES
+BY_SLUG = {g["slug"]: g for g in GUIDES}
+
+# Nothing ships with a broken internal link or a duplicate: refuse to build instead.
+assert len(BY_SLUG) == len(GUIDES), "duplicate guide slug"
+for g in GUIDES:
+    assert g["hub"] in HUB_NAMES, g["slug"] + ": unknown hub"
+    for r in g["related"]:
+        assert r in BY_SLUG and r != g["slug"], f'{g["slug"]}: related guide "{r}" does not exist'
+    for text in [g["answer"], g["body"]] + [a for _, a in g["faqs"]]:
+        for linked in re.findall(r'href="/guides/([^"/]+)/"', text):
+            assert linked in BY_SLUG, f'{g["slug"]}: links to missing guide "{linked}"'
+    if len(g["desc"]) > 165:
+        print(f'  note: {g["slug"]} description is {len(g["desc"])} chars')
+
+
+def _plain(html):
+    """HTML fragment -> plain text for schema and meta (entities decoded, tags dropped)."""
+    import html as _h
+    return re.sub(r"\s+", " ", _h.unescape(re.sub(r"<[^>]+>", "", html))).strip()
+
+
+def _slugify(text):
+    return re.sub(r"[^a-z0-9]+", "-", _plain(text).lower()).strip("-")[:60]
+
+
+def _with_ids(body):
+    """Give every <h2> an id and return (body, [(id, heading)]) for the contents list."""
+    toc = []
+
+    def add(m):
+        heading = m.group(1)
+        hid = _slugify(heading)
+        toc.append((hid, heading))
+        return f'<h2 id="{hid}">{heading}</h2>'
+    return re.sub(r"<h2>(.*?)</h2>", add, body), toc
+
+
+def _minutes(g):
+    words = len(_plain(g["answer"] + g["body"] + " ".join(q + a for q, a in g["faqs"])).split())
+    return max(3, round(words / 200))
+
+
+def guide_crumbs(path, title=None):
+    url = BASE + path
+    items = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE + "/"},
+        {"@type": "ListItem", "position": 2, "name": "Guides", "item": BASE + "/guides/"},
+    ]
+    if title:
+        items.append({"@type": "ListItem", "position": 3, "name": title, "item": url})
+    else:
+        items = items[:2]
+    return {"@type": "BreadcrumbList", "@id": url + "#breadcrumb", "itemListElement": items}
+
+
+def guide_card(g):
+    return f"""
+          <a class="guide-card" href="/guides/{g["slug"]}/">
+            <span class="guide-card__hub">{HUB_NAMES[g["hub"]]}</span>
+            <h3>{g["h1"][0].upper() + g["h1"][1:]}</h3>
+            <p>{g["desc"]}</p>
+          </a>"""
+
+
+LEGAL_NOTE = """<p class="guide-note"><strong>Not legal advice.</strong> This guide explains UK law in general terms,
+      as at the date shown. The ICO&rsquo;s guidance on monitoring workers was under review following the Data (Use and
+      Access) Act 2025 when this was written &mdash; check the <a href="https://ico.org.uk/" rel="noopener">ICO</a> for
+      the current position, and take advice for your own circumstances.</p>"""
+
+
+def render_guide(g):
+    path = f'/guides/{g["slug"]}/'
+    url = BASE + path
+    body, toc = _with_ids(g["body"])
+    h1 = g["h1"][0].upper() + g["h1"][1:]
+    faqs_html = "\n".join(
+        f"""          <details>
+            <summary>{q}</summary>
+            <p>{a}</p>
+          </details>""" for q, a in g["faqs"])
+    toc_html = "\n".join(f'              <li><a href="#{hid}">{h}</a></li>' for hid, h in toc)
+    related = "".join(guide_card(BY_SLUG[r]) for r in g["related"])
+    article = {
+        "@type": "Article",
+        "@id": url + "#article",
+        "headline": _plain(h1),
+        "description": _plain(g["desc"]),
+        "datePublished": GUIDES_UPDATED,
+        "dateModified": GUIDES_UPDATED,
+        "inLanguage": "en-GB",
+        "author": {"@id": BASE + "/#organization"},
+        "publisher": {"@id": BASE + "/#organization"},
+        "image": OG,
+        "mainEntityOfPage": {"@id": url + "#webpage"},
+        "articleSection": _plain(HUB_NAMES[g["hub"]]),
+        "isPartOf": {"@id": BASE + "/guides/#webpage"},
+    }
+    page = dict(webpage(path, _plain(g["title"]), _plain(g["desc"]), crumb=True, about=BASE + "/#organization"))
+    faq_node = {
+        "@type": "FAQPage",
+        "@id": url + "#faq",
+        "mainEntity": [{
+            "@type": "Question", "name": _plain(q),
+            "acceptedAnswer": {"@type": "Answer", "text": _plain(a)},
+        } for q, a in g["faqs"]],
+    }
+    html = (
+        head(g["title"] + " | TrackLink", _plain(g["desc"]), path,
+             graph([ORG, SITE, page, article, faq_node, guide_crumbs(path, _plain(h1))]))
+        + header("/guides/")
+        + f"""
+    <div class="page-head">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li>{HUB_NAMES[g["hub"]]}</li>
+          </ol>
+        </nav>
+        <h1>{h1}</h1>
+        <p class="guide-meta">Updated <time datetime="{GUIDES_UPDATED}">{GUIDES_UPDATED_TEXT}</time> &middot; {_minutes(g)} min read &middot; By Civil Digital</p>
+      </div>
+    </div>
+
+    <section class="section guide-section">
+      <div class="container">
+        <article class="prose guide">
+          <div class="guide-answer">
+            <p class="guide-answer__label">The short answer</p>
+            <p>{g["answer"]}</p>
+          </div>
+          {LEGAL_NOTE if g["hub"] == "law" else ""}
+          <nav class="guide-toc" aria-label="In this guide">
+            <p class="guide-toc__label">In this guide</p>
+            <ol>
+{toc_html}
+              <li><a href="#guide-faq">Common questions</a></li>
+            </ol>
+          </nav>
+{body}
+          <h2 id="guide-faq">Common questions</h2>
+          <div class="faq guide-faq">
+{faqs_html}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--tint">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Keep reading</p>
+          <h2>Related guides</h2>
+        </div>
+        <div class="guide-grid">{related}
+        </div>
+        <p class="section-foot"><a class="more" href="/guides/">All GPS tracking guides</a></p>
+      </div>
+    </section>
+"""
+        + cta("Track your team the transparent way",
+              "TrackLink puts your team on one live map from the phones they already carry. 14-day free trial, no card required.")
+        + FOOTER
+    )
+    write(f'guides/{g["slug"]}/index.html', html)
+
+
+for _g in GUIDES:
+    render_guide(_g)
+
+# ---------- guides index ----------
+_hub_sections = []
+for key, name, intro in HUBS:
+    items = [g for g in GUIDES if g["hub"] == key]
+    _hub_sections.append(f"""
+        <section class="guide-hub" id="{key}" aria-labelledby="hub-{key}">
+          <h2 id="hub-{key}">{name}</h2>
+          <p>{intro}</p>
+          <div class="guide-grid">{"".join(guide_card(g) for g in items)}
+          </div>
+        </section>""")
+_guides_desc = "Plain-English guides to GPS tracking for UK businesses: costs, choosing a tracker, UK law and privacy, accuracy, battery life and tracking by industry."
+guides_index = (
+    head("GPS Tracking Guides for UK Businesses | TrackLink", _guides_desc, "/guides/",
+         graph([ORG, SITE,
+                dict(webpage("/guides/", "GPS tracking guides", _guides_desc, crumb=True,
+                             types=["WebPage", "CollectionPage"], about=BASE + "/#organization"),
+                     **{"hasPart": [{"@id": f'{BASE}/guides/{g["slug"]}/#article'} for g in GUIDES]}),
+                guide_crumbs("/guides/")]))
+    + header("/guides/")
+    + f"""
+    <div class="page-head">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li>Guides</li>
+          </ol>
+        </nav>
+        <h1>GPS tracking guides</h1>
+        <p>Straight answers to the questions businesses and their teams ask about GPS tracking &mdash; what it costs, what the law says in the UK, how accurate it is and how to use it well.</p>
+        <nav class="guide-hubnav" aria-label="Guide topics">
+          {" ".join(f'<a href="#{k}">{n}</a>' for k, n, _ in HUBS)}
+        </nav>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">{"".join(_hub_sections)}
+      </div>
+    </section>
+"""
+    + cta("Ready to see your team on one map?",
+          "Start your 14-day free trial &mdash; 1 Hub seat and 3 Track seats included, no card required.")
+    + FOOTER
+)
+write("guides/index.html", guides_index)
+
+# ---------- sitemap (generated from here on, so new guides can't be forgotten) ----------
+_sitemap_pages = [
+    ("/", GUIDES_UPDATED), ("/features/", GUIDES_UPDATED), ("/how-it-works/", GUIDES_UPDATED),
+    ("/pricing/", GUIDES_UPDATED), ("/faq/", GUIDES_UPDATED), ("/guides/", GUIDES_UPDATED),
+] + [(f'/guides/{g["slug"]}/', GUIDES_UPDATED) for g in GUIDES] + [
+    ("/privacy/", "2026-09-05"), ("/terms/", "2026-09-05"), ("/delete-account/", "2026-09-17"),
+]
+write("sitemap.xml",
+      '<?xml version="1.0" encoding="UTF-8"?>\n'
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+      + "".join(f"  <url>\n    <loc>{BASE}{p}</loc>\n    <lastmod>{d}</lastmod>\n  </url>\n"
+                for p, d in _sitemap_pages)
+      + "</urlset>\n")
+
 # --------------------------------------------------------------------------
 # patch the nav + footer on the hand-maintained pages (privacy, terms, 404)
 # --------------------------------------------------------------------------
@@ -972,6 +1243,8 @@ FOOTER_BLOCK = ('            <li><a href="/features/">Features</a></li>\n'
 # reachable without the app on the Data Safety form); rerunnable like the nav patch.
 DELETE_LINK = '            <li><a href="/delete-account/">Delete your account</a></li>\n'
 TERMS_LINK = '            <li><a href="/terms/">Terms</a></li>\n'
+FAQ_LINK = '            <li><a href="/faq/">FAQ</a></li>\n'
+GUIDES_LINK = '            <li><a href="/guides/">Guides</a></li>\n'
 
 for f in ["privacy/index.html", "terms/index.html", "delete-account/index.html", "404.html"]:
     p = ROOT / f
@@ -985,6 +1258,9 @@ for f in ["privacy/index.html", "terms/index.html", "delete-account/index.html",
                   '<a href="/pricing/">current pricing</a>')
     if TERMS_LINK in s and DELETE_LINK not in s:
         s = s.replace(TERMS_LINK, TERMS_LINK + DELETE_LINK, 1)
+    if GUIDES_LINK not in s and FAQ_LINK in s:
+        s = s.replace(FAQ_LINK, FAQ_LINK + GUIDES_LINK, 1)
+    s = s.replace(f'href="{APP}">Start free trial', f'href="{SIGNUP}">Start free trial')
 
     assert '<ul class="nav__links" id="primary-nav">' in s, f + ": lost the <ul>"
     assert s.count('</ul>') == s.count('<ul'), f + ": unbalanced <ul>"
