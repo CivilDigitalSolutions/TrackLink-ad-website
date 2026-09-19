@@ -22,6 +22,7 @@ description on GitHub (the actual Android/Firebase app lives locally at
 ├── how-it-works/index.html   # The Track/Hub model, walked through in 3 steps
 ├── pricing/index.html        # Full pricing: base plan, seat packs, add-ons
 ├── faq/index.html            # All 10 questions (carries the FAQPage schema)
+├── guides/                   # 27 SEO guides + index, GENERATED from tools/guides/ (see "Guides")
 ├── privacy/index.html        # Privacy Policy
 ├── terms/index.html          # Terms & Conditions
 ├── 404.html                  # Not-found page
@@ -61,9 +62,31 @@ boilerplate cannot drift across eight files. Its output is what is committed.
 python3 tools/build-pages.py
 ```
 
-**It overwrites `index.html`, `features/`, `how-it-works/`, `pricing/` and
-`faq/`.** If you hand-edit one of those, either port the change back into the
-script or stop running it. `privacy/`, `terms/` and `404.html` are maintained
+**It overwrites `index.html`, `features/`, `how-it-works/`, `pricing/`,
+`faq/`, everything under `guides/`, and `sitemap.xml`.** If you hand-edit one of
+those, either port the change back into the script or stop running it.
+
+On Windows, run it with the Python that ships with the Google Cloud SDK
+(`platform/bundledpython/python.exe`) — the `python3` on PATH may be the
+Microsoft Store stub.
+
+### Guides (`/guides/`, added 2026-09-19)
+
+The SEO guide articles are **content in `tools/guides/`**, one module per topic
+hub (`costs.py`, `law.py`, `tech.py`, `industry.py`, `assets.py`), rendered by
+`build-pages.py` into `guides/index.html` and `guides/<slug>/index.html` with
+Article, FAQPage and BreadcrumbList schema. To add a guide, append a `dict(...)`
+to the right module and re-run the script — it joins the index, its hub and
+`sitemap.xml` automatically.
+
+- **Every price and product claim comes from `tools/guides/facts.py`.** Change a
+  price there, never inside an article. Prices are the **web (Stripe)** prices a
+  visitor to this site pays; Google Play in the app costs more.
+- The build **refuses to run** if a guide links to a guide that doesn't exist or a
+  slug is duplicated, and warns when a meta description runs past ~165 characters.
+- The legal guides (`law.py`) are written for **UK** law and carry an automatic
+  "not legal advice" note. Re-check them against the ICO when its monitoring
+  guidance is reissued after the Data (Use and Access) Act 2025. `privacy/`, `terms/` and `404.html` are maintained
 by hand — the script only patches their nav and footer links, rerunnably.
 
 If you change the navigation, the footer or anything else in the page chrome,
