@@ -501,8 +501,8 @@ FAQS = [
      "No. TrackLink runs on the phone your team member already carries &mdash; there is no box to fit, no installer to book and nothing to move when someone changes vehicle.",
      "No. TrackLink runs on the phone your team member already carries — there is no box to fit, no installer to book and nothing to move when someone changes vehicle."),
     ("What does TrackLink cost?",
-     "TrackLink starts at &pound;16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs &mdash; see <a href=\"/pricing/\">full pricing</a>. We are not VAT registered, so no VAT is added.",
-     "TrackLink starts at £16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs. We are not VAT registered, so no VAT is added."),
+     "TrackLink starts at &pound;16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs &mdash; see <a href=\"/pricing/\">full pricing</a>.",
+     "TrackLink starts at £16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs."),
     ("How often does TrackLink update a device&rsquo;s location?",
      "The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance so you know the trade-off before you turn them on.",
      "The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance."),
@@ -869,7 +869,7 @@ pricing = (
 {PLAN_CARD}
 {ADDONS}
         <p class="pricing-note">Seat packs are billed monthly or annually (annual &asymp; 10&times; the monthly rate, roughly 2 months free). Need a bigger team or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
-        <p class="pricing-note"><strong>These are the prices you pay.</strong> We are not VAT registered, so no VAT is added to them. Subscribing inside the Android app instead costs more &mdash; &pound;21.99 base plan, &pound;29.49 Track pack, &pound;14.49 Hub pack &mdash; because Google takes a larger share of in-app payments and sets its own Play prices, which include the VAT Google collects.</p>
+        <p class="pricing-note"><strong>These are the prices you pay.</strong> Subscribing inside the Android app instead costs more &mdash; &pound;21.99 base plan, &pound;29.49 Track pack, &pound;14.49 Hub pack &mdash; because Google takes a larger share of in-app payments and sets its own Play prices.</p>
       </div>
     </section>
 
