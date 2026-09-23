@@ -82,7 +82,8 @@ dict(
       </ul>
       <p>Worked example: a team of {EX20_TRACK} people tracked with three managers comes to <strong>{gbp(EX20_TOTAL)} a
       month</strong> on the web. Prices above are for signing up on the web; subscribing inside the Android app through
-      Google Play costs a little more ({gbp(PLAY_BASE)} for the base plan). See <a href="/pricing/">full pricing</a>.</p>
+      Google Play costs more ({gbp(PLAY_BASE)} for the base plan, including VAT), because Google takes a larger share of
+      in-app payments. See <a href="/pricing/">full pricing</a>.</p>
 
       <h2>How to budget for GPS tracking</h2>
       <ol>

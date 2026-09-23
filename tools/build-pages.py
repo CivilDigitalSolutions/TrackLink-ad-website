@@ -399,7 +399,7 @@ FEATURE_CARDS = {
                 <circle cx="18" cy="5" r="2.4" stroke="#14224E" stroke-width="1.8"/>
                 <path d="M8 19h7a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1" stroke="#2F6BE4" stroke-width="1.8" stroke-linecap="round"/>
               </svg>""", "Route history",
-     "Review the last 24 hours, 7 days or 30 days for any device &mdash; a full route with stats, kept for 30 days by default or 365 days with the retention add-on."),
+     "Review the last 24 hours, 7 days or 30 days for any device &mdash; a full route with stats, kept for 30 days."),
     "groups": ("""<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="8.5" cy="8" r="3" stroke="#14224E" stroke-width="1.8"/>
                 <circle cx="17" cy="9.5" r="2.4" stroke="#14224E" stroke-width="1.8"/>
@@ -482,12 +482,12 @@ ADDONS = """
             </table>
           </div>
           <div class="addon-card">
-            <h4>History retention</h4>
-            <p class="addon-rate">&pound;15 per seat / month</p>
+            <h4>Route history</h4>
+            <p class="addon-rate">Included</p>
             <table>
-              <caption class="visually-hidden">History retention pricing</caption>
-              <tr><td>30 days (default)</td><td>Included</td></tr>
-              <tr><td>365 days (add-on)</td><td>&pound;15/seat/mo</td></tr>
+              <caption class="visually-hidden">Route history retention</caption>
+              <tr><td>30 days of history</td><td>Included</td></tr>
+              <tr><td>Need longer?</td><td><a href="mailto:info@civildigital.co.uk">Ask us</a></td></tr>
             </table>
           </div>
         </div>
@@ -501,8 +501,8 @@ FAQS = [
      "No. TrackLink runs on the phone your team member already carries &mdash; there is no box to fit, no installer to book and nothing to move when someone changes vehicle.",
      "No. TrackLink runs on the phone your team member already carries — there is no box to fit, no installer to book and nothing to move when someone changes vehicle."),
     ("What does TrackLink cost?",
-     "TrackLink starts at &pound;16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days &mdash; see <a href=\"/pricing/\">full pricing</a>.",
-     "TrackLink starts at £16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs, and an optional add-on extends history retention from 30 to 365 days."),
+     "TrackLink starts at &pound;16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs &mdash; see <a href=\"/pricing/\">full pricing</a>. We are not VAT registered, so no VAT is added.",
+     "TrackLink starts at £16/month for 1 Hub seat plus 3 Track seats, with a 14-day free trial. Extra Track and Hub seats come in packs. We are not VAT registered, so no VAT is added."),
     ("How often does TrackLink update a device&rsquo;s location?",
      "The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance so you know the trade-off before you turn them on.",
      "The standard cadences are 30 seconds, 60 seconds or 5 minutes. A 5-second high-frequency mode and a 1-second Live Track mode are also available as explicit opt-ins for near-live tracking, with in-app battery and data guidance."),
@@ -522,8 +522,8 @@ FAQS = [
      "Yes &mdash; an organisation can have any number of Hub users, and every Hub sees every Track device. You can also organise Track users into custom groups (e.g. &ldquo;Morning shift&rdquo;) and filter the map by group.",
      "Yes — an organisation can have any number of Hub users, and every Hub sees every Track device. You can also organise Track users into custom groups and filter the map by group."),
     ("How long is location history kept?",
-     "Live location is overwritten on every update. Stored route history is kept for 30 days by default, or 365 days with the retention add-on; older points are deleted automatically once they expire.",
-     "Live location is overwritten on every update. Stored route history is kept for 30 days by default, or 365 days with the retention add-on; older points are deleted automatically once they expire."),
+     "Live location is overwritten on every update. Stored route history is kept for 30 days; older points are deleted automatically once they expire.",
+     "Live location is overwritten on every update. Stored route history is kept for 30 days; older points are deleted automatically once they expire."),
     ("How do I pay, and can I cancel?",
      "Paid plans are billed in advance via Google Play Billing on Android or Stripe on the web, depending on how your organisation subscribes. You can cancel at any time from within TrackLink; access runs to the end of the current billing period.",
      "Paid plans are billed in advance via Google Play Billing on Android or Stripe on the web, depending on how your organisation subscribes. You can cancel at any time from within TrackLink; access runs to the end of the current billing period."),
@@ -725,12 +725,12 @@ features = (
             <span class="eyebrow">After the fact</span>
             <h3>Route history that answers the awkward questions</h3>
             <p>Pull up any device&rsquo;s day and get the whole route back &mdash; where they went, where they stopped and for how long. Useful for a delivery dispute, a timesheet query, or working out why Tuesday&rsquo;s round takes an hour longer than Wednesday&rsquo;s.</p>
-            <p>History is kept for 30 days as standard, or 365 days with the retention add-on. Older points are deleted automatically once they expire.</p>
+            <p>History is kept for 30 days. Older points are deleted automatically once they expire.</p>
             <ul class="spec-list">
               <li>Last 24 hours, 7 days or 30 days for any device</li>
               <li>Distance, moving time, stop count and speeds</li>
               <li>Stops flagged with how long the device sat there</li>
-              <li>30-day retention included, 365-day optional</li>
+              <li>30 days of route history included</li>
             </ul>
           </div>
           {shot("route", "Hub &middot; Route history")}
@@ -822,7 +822,7 @@ how = (
             <span class="eyebrow">Step 3</span>
             <h3>Anyone&rsquo;s day can be reviewed afterwards</h3>
             <p>Pick a device, pick 24 hours, 7 days or 30 days, and the route comes back with its stops, dwell times, distance and speeds. That is usually enough to settle a &ldquo;we never got that delivery&rdquo; conversation in about a minute.</p>
-            <p>History is retained for 30 days as standard, or 365 days if your organisation buys the retention add-on.</p>
+            <p>History is retained for 30 days.</p>
           </div>
           {shot("route", "Hub &middot; Route history")}
         </div>
@@ -857,7 +857,7 @@ pricing = (
         "TrackLink pricing: £16/month for 1 Hub seat and 3 Track seats, with a 14-day free trial. Track and Hub seat packs, plus an optional 365-day history add-on.",
         "/pricing/",
         graph([ORG, SITE,
-               webpage("/pricing/", "TrackLink pricing", "TrackLink pricing: £16/month for 1 Hub seat and 3 Track seats with a 14-day free trial, plus Track and Hub seat packs and a history retention add-on.", crumb=True),
+               webpage("/pricing/", "TrackLink pricing", "TrackLink pricing: £16/month for 1 Hub seat and 3 Track seats with a 14-day free trial, plus Track and Hub seat packs.", crumb=True),
                breadcrumb("/pricing/", "Pricing"), APP_NODE]),
     )
     + header("/pricing/")
@@ -868,8 +868,8 @@ pricing = (
       <div class="container">
 {PLAN_CARD}
 {ADDONS}
-        <p class="pricing-note">History retention is priced per seat and applies to every seat on the account, Track and Hub alike &mdash; so on the base plan (1 Hub + 3 Track), 365-day history is &pound;60/month. Every add-on is billed monthly or annually (annual &asymp; 10&times; the monthly rate, roughly 2 months free). Need a bigger team or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
-        <p class="pricing-note">Prices shown are for signing up on the web. Subscribing inside the Android app through Google Play costs a little more (&pound;18 base plan, &pound;25 Track pack, &pound;12 Hub pack), because Google takes a larger share of in-app payments.</p>
+        <p class="pricing-note">Seat packs are billed monthly or annually (annual &asymp; 10&times; the monthly rate, roughly 2 months free). Need a bigger team or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
+        <p class="pricing-note"><strong>These are the prices you pay.</strong> We are not VAT registered, so no VAT is added to them. Subscribing inside the Android app instead costs more &mdash; &pound;21.99 base plan, &pound;29.49 Track pack, &pound;14.49 Hub pack &mdash; because Google takes a larger share of in-app payments and sets its own Play prices, which include the VAT Google collects.</p>
       </div>
     </section>
 
