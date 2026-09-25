@@ -869,7 +869,7 @@ pricing = (
 {PLAN_CARD}
 {ADDONS}
         <p class="pricing-note">Seat packs are billed monthly or annually (annual &asymp; 10&times; the monthly rate, roughly 2 months free). Need a bigger team or a custom plan? <a href="mailto:info@civildigital.co.uk">Get in touch</a>.</p>
-        <p class="pricing-note"><strong>These are the prices you pay.</strong> Subscribing inside the Android app instead costs more &mdash; &pound;21.99 base plan, &pound;29.49 Track pack, &pound;14.49 Hub pack &mdash; because Google takes a larger share of in-app payments and sets its own Play prices.</p>
+        <p class="pricing-note"><strong>These are the prices you pay.</strong> Subscribing inside the Android app instead costs more &mdash; &pound;21.49 base plan, &pound;29.99 Track pack, &pound;14.49 Hub pack &mdash; because Google takes a larger share of in-app payments and sets its own Play prices.</p>
       </div>
     </section>
 

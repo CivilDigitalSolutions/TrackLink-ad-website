@@ -16,7 +16,7 @@ TRACK_PACK = 22      # +5 Track seats  (£4.40 a seat)
 HUB_PACK = 11        # +2 Hub seats    (£5.50 a seat)
 TRACK_SEAT = 5       # single Track seats, only once all 3 Track packs are on the plan
 HUB_SEAT = 6         # single Hub seats, only once both Hub packs are on the plan
-PLAY_BASE = 21.99    # the same base plan bought in the Android app via Google Play. Play sets its
+PLAY_BASE = 21.49    # the same base plan bought in the Android app via Google Play. Play sets its
                      # own GB prices, so this is not the web price plus a margin — read it off Play
                      # Console.
 
